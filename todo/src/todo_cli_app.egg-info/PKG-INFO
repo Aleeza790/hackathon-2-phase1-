@@ -1,0 +1,100 @@
+Metadata-Version: 2.4
+Name: todo-cli-app
+Version: 0.1.0
+Summary: A simple CLI-based todo application with in-memory storage
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Requires-Dist: rich>=13.0.0
+
+# CLI Todo Application
+
+A simple command-line interface todo application with in-memory storage, built with Python 3.13.
+
+## Features
+
+- Add tasks with title and optional description
+- List all tasks with status indicators
+- Update task details by ID
+- Delete tasks by ID
+- Toggle task completion status
+- Interactive REPL interface
+
+## Setup
+
+1. Ensure you have Python 3.13 installed
+2. Install the project dependencies using `uv`:
+   ```bash
+   uv venv
+   uv pip install -e .
+   ```
+
+## Usage
+
+To start the CLI application, run:
+
+```bash
+python -m src.main
+```
+
+Or if you have the package installed:
+```bash
+todo
+```
+
+## Available Commands
+
+- `add "Title" "Description"` - Add a new task with title and optional description
+  Example: `add "Buy groceries" "Milk, eggs, bread"`
+
+- `list` or `ls` - Show all tasks with their status
+  Example: `list`
+
+- `update ID "Title" "Description"` - Update the title and/or description of a task
+  Example: `update 1 "Updated title" "Updated description"`
+
+- `delete ID` or `del ID` - Remove a task by ID
+  Example: `delete 1`
+
+- `done ID` or `toggle ID` - Mark a task as complete/incomplete
+  Example: `done 1`
+
+- `help` or `?` - Show available commands
+  Example: `help`
+
+- `exit` - Exit the application
+  Example: `exit`
+
+## Example Session
+
+```
+Welcome to the Todo App!
+Type 'help' for available commands or 'exit' to quit.
+
+> add "Buy groceries" "Milk, eggs, bread"
+Task added with ID: 1
+> add "Call mom"
+Task added with ID: 2
+> list
+Your tasks:
+1. [❌] Buy groceries
+    Milk, eggs, bread
+2. [❌] Call mom
+> done 1
+Task 1 marked as completed
+> list
+Your tasks:
+1. [✅] Buy groceries
+    Milk, eggs, bread
+2. [❌] Call mom
+> exit
+Goodbye!
+```
+
+## Architecture
+
+The application follows a clean architecture pattern with separation of concerns:
+
+- `models.py` - Contains the Task data model
+- `storage.py` - Implements the InMemoryTodoService with all CRUD operations
+- `cli.py` - Handles command parsing and user interface
+- `main.py` - Application entry point
